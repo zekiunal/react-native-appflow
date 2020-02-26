@@ -1,0 +1,36 @@
+{
+  "name": "react-native-appflow",
+  "title": "React Native AppFlow",
+  "version": "0.0.1",
+  "description": "TODO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zekiunal/react-native-appflow.git",
+    "baseUrl": "https://github.com/zekiunal/react-native-appflow"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Zeki Ünal",
+    "email": "zekiunal@gmail.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-native": ">=0.61.5 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  }
+}
