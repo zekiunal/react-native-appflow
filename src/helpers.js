@@ -16,7 +16,7 @@ export function createNavigator(Stack, Provider = false) {
     }
 
     return (<Stack/>);
-};
+}
 
 export function withProvider(Context, props, actions, state, dispatch) {
     const boundActions = {};
@@ -63,7 +63,6 @@ export function withInject(Context, InjectContext, props, actions, state, dispat
 export default function createDataContext(Context, reducer, actions, default_state, InjectContext = false) {
 
     const Provider = (props) => {
-        console.log(props);
         const [state, dispatch] = useReducer(reducer, default_state);
 
         return (!InjectContext) ?
