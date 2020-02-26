@@ -1,3 +1,3 @@
-import createDataContext, {createNavigator} from "./helpers";
+import createDataContext, {createNavigator, navigationRef, navigate} from "./helpers";
 
-export {createDataContext, createNavigator};
+export {createDataContext, createNavigator, navigationRef, navigate};
