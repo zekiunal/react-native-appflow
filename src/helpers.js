@@ -1,4 +1,4 @@
-import React, {useReducer, createContext} from 'react';
+import React, {useReducer} from 'react';
 
 export function createNavigator(Stack, Provider = false) {
     if (Provider) {
@@ -12,7 +12,7 @@ export function createNavigator(Stack, Provider = false) {
     return (<Stack/>);
 };
 
-export function withProvider(Context, children, actions, state, dispatch) {
+export function withProvider(Context, props, actions, state, dispatch) {
     const boundActions = {};
     for (let key in actions) {
         if (actions.hasOwnProperty(key)) {
@@ -21,13 +21,13 @@ export function withProvider(Context, children, actions, state, dispatch) {
     }
 
     return (
-        <Context.Provider value={{state, ...boundActions}}>
-            {children}
+        <Context.Provider value={{state, ...boundActions, ...props}} {...props}>
+            {props.children}
         </Context.Provider>
     );
 }
 
-export function withInject(Context, InjectContext, children, actions, state, dispatch) {
+export function withInject(Context, InjectContext, props, actions, state, dispatch) {
     const boundActions = {};
     return (
         <InjectContext.Consumer>
@@ -42,10 +42,10 @@ export function withInject(Context, InjectContext, children, actions, state, dis
                     return (
                         <Context.Provider
                             value={{
-                                ...boundActions, ...injectedProps,
-                                state: Object.assign({}, injectedProps.state, state)
-                            }}>
-                            {children}
+                                ...boundActions, ...injectedProps, ...props,
+                                state: Object.assign({}, injectedProps.state, state,)
+                            }} {...props}>
+                            {props.children}
                         </Context.Provider>
                     );
                 }
@@ -54,17 +54,16 @@ export function withInject(Context, InjectContext, children, actions, state, dis
     )
 }
 
-export default function createDataContext(reducer, actions, default_state, InjectContext = false) {
-
-    const Context = createContext({});
+export default function createDataContext(Context, reducer, actions, default_state, InjectContext = false) {
 
     const Provider = (props) => {
+        console.log(props);
         const [state, dispatch] = useReducer(reducer, default_state);
 
         return (!InjectContext) ?
-            withProvider(Context, props.children, actions, state, dispatch)
+            withProvider(Context, props, actions, state, dispatch)
             :
-            withInject(Context, InjectContext, props.children, actions, state, dispatch)
+            withInject(Context, InjectContext, props, actions, state, dispatch)
     };
 
     return {Provider, Context};
